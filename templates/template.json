@@ -1,0 +1,34 @@
+{
+    "version": 1,
+    "name": "coffemachine1",
+    "inputdata": {
+      "coffe-1": {
+        "x": 16,
+        "y": 6
+      },
+      "coffe-2": {
+        "x": 16,
+        "y": 9
+      },
+      "coffe-3": {
+        "x": 16,
+        "y": 12
+      },
+      "balance": {
+        "x": 36,
+        "y": 12
+      },
+      "cost": {
+        "x": 35,
+        "y": 13
+      },
+      "change": {
+        "x": 36,
+        "y": 15
+      },
+      "dispenser": {
+        "x": 6,
+        "y": 20
+      }
+    }
+  }
