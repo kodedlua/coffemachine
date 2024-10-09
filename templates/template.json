@@ -26,7 +26,15 @@
         "x": 36,
         "y": 15
       },
-      "dispenser": {
+      "dispenser-1": {
+        "x": 6,
+        "y": 18
+      },
+      "dispenser-2": {
+        "x": 6,
+        "y": 19
+      },
+      "dispenser-3": {
         "x": 6,
         "y": 20
       }
