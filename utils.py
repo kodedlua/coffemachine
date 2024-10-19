@@ -3,6 +3,7 @@ def formatNumber(cost: int) -> str:
 
 BANKNOTES = [1000, 500, 100, 25, 10, 5, 1]
 
+# using greedy change alghorithm for now, TODO: dynamic approach to the problem, if even possible on larger scale
 def moneyInNotesAsList(amount:int, notes:list=BANKNOTES) -> list:
     K = [0 for x in range(len(notes))]
     i = 0

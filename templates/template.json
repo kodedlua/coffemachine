@@ -3,14 +3,17 @@
     "name": "coffemachine1",
     "inputdata": {
       "coffe-1": {
+        "label": "black",
         "x": 16,
         "y": 6
       },
       "coffe-2": {
+        "label": "cappucino",
         "x": 16,
         "y": 9
       },
       "coffe-3": {
+        "label": "latte",
         "x": 16,
         "y": 12
       },
