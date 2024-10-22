@@ -131,7 +131,7 @@ class Machine(object):
             accountbox.addstr(f"Currently adding in {utils.moneyInNotesAsText(nominal)}| ")
 
         banknote_text = utils.moneyInNotesAsText(self.balance)
-        accountbox.addstr(f"Your balance is: {round(self.balance, 2)}$ Coins: {banknote_text}")
+        accountbox.addstr(f"Your balance is: {banknote_text}({round(self.balance, 2)}$)")
 
         return accountbox
 
@@ -178,7 +178,6 @@ class Machine(object):
 
             self.stdscr.refresh()
             keybind = self.stdscr.getch()
-
             # normal mode
             if keybind == curses.KEY_UP and not putMode:
                 if selectedRow-1 >= 0:
@@ -188,7 +187,7 @@ class Machine(object):
                     selectedRow+=1
             elif keybind == ord("s") and not putMode:
                 if selectedRow <= 2:
-                    if selected.count(self.items[selectedRow][0])+1 <= 9:
+                    if selected.count(self.items[selectedRow][0])+1 <= 2:
                         selected.append(self.items[selectedRow][0])
             elif keybind == ord("r") and not putMode:
                 if selectedRow <= 2:
@@ -202,9 +201,10 @@ class Machine(object):
                     putMode = True
                     selectedRow = 3
             elif keybind == ord("a") and not putMode:
-                self.balance+=self.change
-                coinsBalance=0
-                selected.clear()
+                if coinsBalance >= self.cost:
+                    self.balance+=self.change
+                    coinsBalance=0
+                    selected.clear()
             # when in put in money mode
             elif keybind == ord("2") and putMode:
                 if coinsBalance+nominal <= 100:
