@@ -6,11 +6,15 @@ from utils import formatNumber
 import math
 
 class Machine(object):
-    def __init__(self, items, balance, stdscr, loader):
-        self.items = items
+    def __init__(self, balance, stdscr, loader):
         self.balance = balance
         self.stdscr = stdscr
         self.template, self.config = loader.load()
+        self.resources = self.config['resources']
+        self.items = []
+        for key, item in self.config['inputdata'].items():
+            if key.startswith("coffee"):
+                self.items.append([item['label'], item['cost'], item['recipe']])
 
     def renderMachine(self, height, width, selectedRows, selected, balance):
         # load all data and format it
@@ -18,18 +22,18 @@ class Machine(object):
         balance_cords = inputdata['balance']
         cost_cords = inputdata['cost']
         change_cords = inputdata['change']
-        coffe_1_cords = {"x":inputdata['coffe-1']['x'], "y":inputdata['coffe-1']['y']}
-        coffe_1_label = inputdata['coffe-1']['label']
-        coffe_1_label_cords = {"x": inputdata['coffe-1']['x']-(2+len(coffe_1_label)), "y": inputdata['coffe-1']['y']}
-        coffe_1_cost = formatNumber(self.items[0][2])
-        coffe_2_cords = {"x":inputdata['coffe-2']['x'], "y":inputdata['coffe-2']['y']}
-        coffe_2_label = inputdata['coffe-2']['label']
-        coffe_2_label_cords = {"x": inputdata['coffe-2']['x']-(2+len(coffe_2_label)), "y": inputdata['coffe-2']['y']}
-        coffe_2_cost = formatNumber(self.items[1][2])
-        coffe_3_cords = {"x":inputdata['coffe-3']['x'], "y":inputdata['coffe-3']['y']}
-        coffe_3_label = inputdata['coffe-3']['label']
-        coffe_3_label_cords = {"x": inputdata['coffe-3']['x']-(2+len(coffe_3_label)), "y": inputdata['coffe-3']['y']}
-        coffe_3_cost = formatNumber(self.items[2][2])
+        coffe_1_cords = {"x":inputdata['coffee-1']['x'], "y":inputdata['coffee-1']['y']}
+        coffe_1_label = inputdata['coffee-1']['label']
+        coffe_1_label_cords = {"x": inputdata['coffee-1']['x']-(2+len(coffe_1_label)), "y": inputdata['coffee-1']['y']}
+        coffe_1_cost = formatNumber(self.items[0][1])
+        coffe_2_cords = {"x":inputdata['coffee-2']['x'], "y":inputdata['coffee-2']['y']}
+        coffe_2_label = inputdata['coffee-2']['label']
+        coffe_2_label_cords = {"x": inputdata['coffee-2']['x']-(2+len(coffe_2_label)), "y": inputdata['coffee-2']['y']}
+        coffe_2_cost = formatNumber(self.items[1][1])
+        coffe_3_cords = {"x":inputdata['coffee-3']['x'], "y":inputdata['coffee-3']['y']}
+        coffe_3_label = inputdata['coffee-3']['label']
+        coffe_3_label_cords = {"x": inputdata['coffee-3']['x']-(2+len(coffe_3_label)), "y": inputdata['coffee-3']['y']}
+        coffe_3_cost = formatNumber(self.items[2][1])
         dispenser_1_cords = inputdata['dispenser-1']
         dispenser_1_count = selected.count(self.items[0][0])
         dispenser_2_cords = inputdata['dispenser-2']
@@ -38,7 +42,7 @@ class Machine(object):
         dispenser_3_count = selected.count(self.items[2][0])
 
         # format cost
-        cost = 0 + (self.items[0][2] * dispenser_1_count) + (self.items[1][2] * dispenser_2_count) + (self.items[2][2] * dispenser_3_count)
+        cost = 0 + (self.items[0][1] * dispenser_1_count) + (self.items[1][1] * dispenser_2_count) + (self.items[2][1] * dispenser_3_count)
         self.cost = cost
         cost_text = "00.00"
         if cost != 0:
