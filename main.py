@@ -11,8 +11,7 @@ class App(object):
         curses.cbreak()
         loader = Loader()
 
-        items = [("coffe-1", "black coffee", 1.55), ("coffe-2", "cappucino", 0.90), ("coffe-3", "latte", 2.20)]
-        machine = Machine(items, balance, self.screen, loader)
+        machine = Machine(balance, self.screen, loader)
         machine.display()
 
 
