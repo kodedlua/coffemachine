@@ -14,7 +14,7 @@ class Machine(object):
         self.items = []
         for key, item in self.config['inputdata'].items():
             if key.startswith("coffee"):
-                self.items.append([item['label'], item['cost'], item['recipe']])
+                self.items.append([key, item['cost'], item['recipe']])
 
     def renderMachine(self, height, width, selectedRows, selected, balance):
         # load all data and format it
@@ -146,9 +146,9 @@ class Machine(object):
         helpbox.attron(curses.color_pair(3))
 
         if putMode:
-            helpbox.addstr(f"[1] [2] - put in/remove from | [3] [4] - decrease/increase nominal | [P] - exit mode | [Q]uit")
+            helpbox.addstr(f"[1] [2] - wloz/wyjmij monete | [3] [4] - zmniejsz/zwieksz nominal | [P] wyjdz z trybu | [Q] wyjdz")
         else:
-            helpbox.addstr("[ARROW UP] [ARROW DOWN] - navigate | [S]elect | [R]emove | [P]ut in coins | [A]pprove selection | [Q]uit")
+            helpbox.addstr("[ARROW UP] [ARROW DOWN] - nawigacja | [S] wybierz | [R] usun | [P] wloz | [A] wybierz | [Q] wyjdz")
 
         return helpbox
 
@@ -206,6 +206,14 @@ class Machine(object):
                     selectedRow = 3
             elif keybind == ord("a") and not putMode:
                 if coinsBalance >= self.cost:
+                    inputdata = self.config['inputdata']
+                    toDispense = []
+                    for select in selected:
+                        water = inputdata[select]['recipe'][0]
+                        milk = inputdata[select]['recipe'][1]
+                        coffee = inputdata[select]['recipe'][2]
+                        if water < self.resources['water'] and milk < self.resources['milk'] and coffee < self.resources['coffee']:
+                            toDispense.append(select)
                     self.balance+=self.change
                     coinsBalance=0
                     selected.clear()
