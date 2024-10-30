@@ -6,9 +6,13 @@ from loader import Loader
 class App(object):
     def __init__(self, stdscr, balance):
         self.screen = stdscr
-        curses.curs_set(0)
-        curses.noecho()
-        curses.cbreak()
+        try:
+            curses.curs_set(0)
+            curses.noecho()
+            curses.cbreak()
+        except:
+            pass
+            
         loader = Loader()
 
         machine = Machine(balance, self.screen, loader)
