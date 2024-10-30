@@ -20,5 +20,5 @@ class App(object):
 
 
 if __name__ == '__main__':
-    balance = float(input("Set balance (dd.ff): "))
-    wrapper(App, balance)
+    # balance = float(input("Set balance (dd.ff): "))
+    wrapper(App, 20)
