@@ -2,13 +2,13 @@
     "version": 2,
     "name": "coffemachine1",
     "resources": {
-      "water": 500,
-      "milk": 250,
-      "coffee": 250
+      "water": 800,
+      "milk": 600,
+      "coffee": 300
     },
     "inputdata": {
       "coffee-1": {
-        "label": "black",
+        "label": "czarna",
         "cost": 1.55,
         "recipe": [25, 0, 50],
         "x": 16,
